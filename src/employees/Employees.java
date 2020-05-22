@@ -1,13 +1,14 @@
 package employees;
 
+import fieldLengthLimitException.FieldLengthLimitException;
 import manager.Manager;
 
 public class Employees {
 
-    protected int id;
-    protected String name;
-    protected String surname;
-    protected double salary;
+    private int id;
+    private String name;
+    private String surname;
+    private double salary;
     private Manager manager;
 
     public final void setId(int id)
@@ -21,15 +22,34 @@ public class Employees {
 
     public void setName(String name)
     {
-        this.name = name;
+        try {
+           if(name.length()>7)
+               throw new FieldLengthLimitException();
+        }
+        catch(FieldLengthLimitException e)
+        {
+            System.out.println("Exception: "+e.toString());
+            return;
+        }
+
+            this.name = name;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setSurname(String Surname)
+    public void setSurname(String surname)
     {
+        try {
+            if(surname.length()>7)
+                throw new FieldLengthLimitException();
+        }
+        catch(FieldLengthLimitException e)
+        {
+            System.out.println("Exception: "+e.toString());
+            return;
+        }
         this.surname = surname;
     }
 
@@ -37,8 +57,18 @@ public class Employees {
         return surname;
     }
 
-    public void setSalary(double Salary)
+    public void setSalary(double salary)
     {
+        try {
+            if(salary<0)
+                throw new FieldLengthLimitException();
+        }
+        catch(FieldLengthLimitException e)
+        {
+            System.out.println("Exception: "+e.toString());
+            return;
+        }
+
         this.salary = salary;
     }
 
@@ -55,13 +85,16 @@ public class Employees {
         return manager;
     }
 
-    public Employees(int id, String name, String surname, double salary, Manager manager)
+    public Employees() {
+salary=1000;
+    }
+
+    public Employees(int id, String name, String surname, double salary)
     {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.salary = salary;
-        this.manager = manager;
     }
 
     public void raiseSalary(double p)
@@ -69,14 +102,28 @@ public class Employees {
         salary = salary + (salary/100)*p;
     }
 
+    public String getManagerName() {
+        if(manager == null) {
+            return "Nomanager";
+        }
+        return System.out.printf(manager.getName() + " " + manager.getSurname()).toString();
+    }
 
     public String toString() {
         StringBuilder string = new StringBuilder();
-
-        string.append("id: " + this.id + " Name: " + this.name + " Surname: " + this.surname + " Salary: " + this.salary + " Manager: " + this.manager);
-
+        string.append("id: " + this.id + " Name: " + this.name + " Surname: " + this.surname + " Salary: " + this.salary );
         return string.toString();
     }
 
+    public void print() {
+        System.out.println(this.toString());
+    }
 
+    public Employees getTopManager(){
+        if(manager == null){
+            return this;
+        } else {
+            return getManager().getTopManager();
+        }
+    }
 }

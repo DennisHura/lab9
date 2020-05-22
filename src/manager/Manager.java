@@ -6,37 +6,24 @@ public class Manager extends Employees {
 
     private double bonus;
 
-
-
-    public Manager(int id, String name, String surname, double salary, Manager manager, double bonus) {
-        super(id, name, surname, salary, manager);
+    public Manager(int id, String name, String surname, double salary, double bonus) {
+        super(id, name, surname, salary);
         this.bonus = bonus;
     }
-
-    public void topManager(int id, String name, String surname, double salary, double bonus)
-    {
-       this.id= id;
-       this.name = name;
-       this.surname = surname;
-       this.salary = salary;
-        this.bonus = bonus;
-    }
-
 
     public void setBonus(double bonus)
     {
         this.bonus = bonus;
     }
 
-    @Override
-    public double getSalary() {
-        return this.getSalary();
+    public double getBonus() {
+        return bonus;
     }
 
-    @Override
+   // @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
-        string.append(" Bonus: " + this.bonus);
+        string.append("id: " + getId() + " name: " + getName() + " surname: " + getSurname() + " salary: " + getSalary() + " bonus: " + bonus + " manager: " + getManager());
         return string.toString();
     }
 }
