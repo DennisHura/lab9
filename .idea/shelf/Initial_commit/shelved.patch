@@ -1,0 +1,8 @@
+Index: .idea/.gitignore
+===================================================================
+--- .idea/.gitignore	(revision 3f6b1075277c6149ecfcae7360d116758f0e738a)
++++ .idea/.gitignore	(revision 3f6b1075277c6149ecfcae7360d116758f0e738a)
+@@ -1,2 +0,0 @@
+-# Default ignored files
+-/workspace.xml
+\ No newline at end of file
